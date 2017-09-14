@@ -40,11 +40,11 @@ void Measure(int ar[], int size, int sort){
             break;
 
         case 5:
-            CountSort(ar, size);
+            RadixSort(ar, size);
             break;
 
         case 6:
-            RadixSort(ar, size);
+            CountSort(ar, size);
             break;
     }
     std::chrono::steady_clock::time_point t2 = Clock::now();
@@ -71,11 +71,11 @@ void Measure(int ar[], int size, int sort){
             break;
 
         case 5:
-            cout << "Count Sort Time: ";
+            cout << "Radix Sort Time: ";
             break;
 
         case 6:
-            cout << "Radix Sort Time: ";
+            cout << "Count Sort Time: ";
             break;
     }
     cout << std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count() << " microseconds" << endl;

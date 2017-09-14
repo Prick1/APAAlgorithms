@@ -177,34 +177,34 @@ for j ← comprimento[A]  downto 1
 void CountSort(int A[], int size){
 
     int min = *(std::min_element(A, A+size));
-    if(min < 0){
+    if(min < 0){ //Adapta o array em caso de numeros negativos
         for(int i = 0; i < size; i++)
-            A[i] -= min;
+            A[i] -= min; //Todos os elementos serão maiores ou iguais a zero
     }
     else
         min = 0;
 
-    int k = *(std::max_element(A, A+size));
-    int C[k+1];
+    int k = *(std::max_element(A, A+size)); //Elemento maximo
+    int C[k+1];//cria um array no qual o ultimo indice é o elemento maximo
 
     for(int i = 0; i <= k; i++)
-        C[i] = 0;
+        C[i] = 0;//Zera os valores do array de contagem
 
     for(int j = 0; j < size; j++)
-        C[A[j]]++;
+        C[A[j]]++;//Conta o numero de ocorrencias para cada valor no array principal
 
-    for(int i = 1; i <= k; i++)
-        C[i] += C[i - 1];
+    for(int i = 1; i <= k; i++)//Transforma o array de contagens em uma tabela de posições
+        C[i] += C[i - 1];//Acumula uma soma que indica a posição do elemento no array ordenado
 
     int B[size];
 
-    for(int j = size - 1; j >= 0; j--){
-        B[ C[ A[j] ] - 1 ] = A[j];
-        C[A[j]]--;
+    for(int j = size - 1; j >= 0; j--){//percorre o array desordenado, para realizar as consultas na tabela de posições
+        B[ C[ A[j] ] - 1 ] = A[j];//Posiciona cada elemento em sua posição correta, em um array indexado a partir do 0
+        C[A[j]]--;//Subtrai uma posição, caso tenha elementos repetidos a serem inseridos
     }
 
     for(int i = 0; i < size; i++){
-        A[i] = B[i] + min;
+        A[i] = B[i] + min;//Transfere os valores pro array de entrada, com a inclusão dos números negativos
     }
 
 }
